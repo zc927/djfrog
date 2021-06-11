@@ -2,7 +2,6 @@
 
 #include <U8g2lib.h>
 #include <AsyncDelay.h>
-#include "DHT.h"
 #include <Wire.h>
 #include "LIS3DHTR.h"
 LIS3DHTR<TwoWire> LIS;
@@ -10,8 +9,6 @@ LIS3DHTR<TwoWire> LIS;
 
 #define DHTPIN 3
 #define DHTTYPE DHT11
-
-DHT dht(DHTPIN, DHTTYPE);
 
 AsyncDelay tick;
 U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(U8G2_R2, SCL, SDA, U8X8_PIN_NONE);
@@ -85,4 +82,14 @@ void duckAnimate() {
     }
   }
   while(u8g2.nextPage());
+}
+
+void changeSong();
+{
+}
+
+void pulse();
+{
+}
+
 }
