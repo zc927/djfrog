@@ -30,7 +30,7 @@ U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(U8G2_R2, SCL, SDA, U8X8_PIN_NONE);
 //define frame1:
 
 uint64_t led1[] = {
-
+ 
   0x5c5cfefefe5c5c5c,
   0x5cff5c5c5c5cff5c,
   0xe6e65cf4f45ce6e6,
@@ -38,7 +38,34 @@ uint64_t led1[] = {
   0x5c5c5c5c5c5c5c5c,
   0x5c5c5c3a3a5c5c5c,
   0xfe5c3a3a3a3a5cfe,
-  0xfefe3a3a3a3afefe
+  0xfefe3a3a3a3afefe,
+ 
+  0xfefefefefefefefe,
+  0x5c57fefefe57575c,
+  0x57ff5c575757ff57,
+  0xe7e75cf2f25ce6e6,
+  0xe7e75c5c5c5ce7e7,
+  0x5c5c5c57575c5c5c,
+  0x575c573a3a575c57,
+  0xfe573a3a3a3a57fe,
+ 
+  0xfefefefefefefefe,
+  0xfefefefefefefefe,
+  0x5761fefefe576161,
+  0x53ff5c53535cff53,
+  0xe7e75cf0f05ce7e7,
+  0xeaea5c57575ceaea,
+  0x575c575353575c57,
+  0x5357533a3a535753,
+ 
+  0xfefefefefefefefe,
+  0x5c57fefefe57575c,
+  0x57ff5c575757ff57,
+  0xe7e75cf2f25ce6e6,
+  0xe7e75c5c5c5ce7e7,
+  0x5c5c5c57575c5c5c,
+  0x575c573a3a575c57,
+  0xfe573a3a3a3a57fe
 };
 
 //define frame2:
@@ -90,12 +117,20 @@ void changeSong()
 {
   Keyboard.press(KEY_LEFT_GUI);
   delay(100);
-  Keyboard.release(KEY_LEFT_GUI);
+  Keyboard.release(KEY_LEFT_GUI); //rn its the control key--- find the key we need
 }
 
 void pulse()
 {
   //insert
+}
+
+void ledAnimate()
+{
+  for (int x=0;x<4;x++) {
+        matrix.displayFrames(led1+x*8, 200, false, 1);
+        delay(800);
+  }
 }
 
 void loop() { 
@@ -122,8 +157,6 @@ void loop() {
       
     tick.repeat();
 
-    for (int x=0;x<3;x++) {
-        matrix.displayFrames(led1+x*8, 200, false, 1);
-        delay(700);
+    ledAnimate();
+    
     }
-}
