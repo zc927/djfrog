@@ -154,16 +154,16 @@ void ledAnimate()
 
 void loop() { 
   // put your main code here, to run repeatedly:
-    if (digitalRead(button) == HIGH)
+    /*if (digitalRead(button) == HIGH)
     {
       changeSong();
-    }
+    }*/
     /*if (analogRead(sound) >  300)
     {
       pulse();
     }*/
     
-    duckAnimate();
+    //duckAnimate();
    
       if (currentFrame == 0)
       {
@@ -176,13 +176,13 @@ void loop() {
       
     tick.repeat();
 
-    ledAnimate();
+    //ledAnimate();
 
     //pulse stuff
-    pulse(strip.Color(255, 0 ,255), 50); //magenta
+    /*pulse(strip.Color(255, 0 ,255), 50); //magenta
     pulse(strip.Color(0, 255 ,255), 50); //aqua
     pulse(strip.Color(30, 0 ,255), 50); //blue
-    pulse(strip.Color(255, 0 ,151), 50); //pink
+    pulse(strip.Color(255, 0 ,151), 50); //pink*/
 
     u8g2.clearBuffer();
     //u8g2.setFont(u8g2_font_ncenBOO_tr);
