@@ -30,7 +30,7 @@ GroveTwoRGBLedMatrixClass matrix;
 AsyncDelay tick;
 U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(U8G2_R2, SCL, SDA, U8X8_PIN_NONE);
 
-Adafruit_NeoPixel strip = Adafruit_NeoPixel(20, A2, NEO_GRB + NEO_KHZ800); //6 is the led pin
+
 
 //pop the image files here:
 
@@ -94,14 +94,16 @@ char button = 6;
 char led = 4;
 char rotary = A0;
 char sound = A2;
-char ledRing = 8; //IDK PLEASE LOOK CHANGE THIS
+char ledRing = D7; //IDK PLEASE LOOK CHANGE THIS
+
+Adafruit_NeoPixel strip = Adafruit_NeoPixel(20, ledRing, NEO_GRB + NEO_KHZ800); //6 is the led pin
 
 void setup() {
   // put your setup code here, to run once:
   u8g2.begin();
   pinMode(button, INPUT);
   pinMode(led, OUTPUT);
-  Keyboard.begin();
+  //Keyboard.begin();
 
   tick.start(fps, AsyncDelay::MILLIS);
 
@@ -127,9 +129,9 @@ void duckAnimate() {
 
 void changeSong()
 {
-  Keyboard.press(KEY_LEFT_GUI);
-  delay(100);
-  Keyboard.release(KEY_LEFT_GUI); //rn its the control key--- find the key we need
+  //Keyboard.press(KEY_LEFT_GUI);
+  //delay(100);
+  //Keyboard.release(KEY_LEFT_GUI); //rn its the control key--- find the key we need
 }
 
 void pulse(uint32_t color, uint8_t waitTime)
