@@ -30,7 +30,7 @@ GroveTwoRGBLedMatrixClass matrix;
 AsyncDelay tick;
 U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(U8G2_R2, SCL, SDA, U8X8_PIN_NONE);
 
-Adafruit_NeoPixel strip = Adafruit_NeoPixel(20, 6, NEO_GRB + NEO_KHZ800); //6 is the led pin
+Adafruit_NeoPixel strip = Adafruit_NeoPixel(20, A2, NEO_GRB + NEO_KHZ800); //6 is the led pin
 
 //pop the image files here:
 
@@ -94,6 +94,7 @@ char button = 6;
 char led = 4;
 char rotary = A0;
 char sound = A2;
+char ledRing = 8 //IDK PLEASE LOOK CHANGE THIS
 
 void setup() {
   // put your setup code here, to run once:
