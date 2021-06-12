@@ -94,7 +94,7 @@ char button = 6;
 char led = 4;
 char rotary = A0;
 char sound = A2;
-char ledRing = 8 //IDK PLEASE LOOK CHANGE THIS
+char ledRing = 8; //IDK PLEASE LOOK CHANGE THIS
 
 void setup() {
   // put your setup code here, to run once:
