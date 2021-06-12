@@ -9,6 +9,11 @@ LIS3DHTR<TwoWire> LIS;
 #include "Adafruit_NeoPixel.h"
 #include <Keyboard.h>
 
+#include "Adafruit_NeoPixel.h"
+#ifdef __AVR__
+  #include <avr/power.h>
+#endif
+
 #define DHTPIN 3
 #define DHTTYPE DHT11
 
@@ -24,6 +29,8 @@ GroveTwoRGBLedMatrixClass matrix;
 
 AsyncDelay tick;
 U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(U8G2_R2, SCL, SDA, U8X8_PIN_NONE);
+
+Adafruit_NeoPixel strip = Adafruit_NeoPixel(20, 6, NEO_GRB + NEO_KHZ800); //6 is the led pin
 
 //pop the image files here:
 
@@ -96,6 +103,10 @@ void setup() {
   Keyboard.begin();
 
   tick.start(fps, AsyncDelay::MILLIS);
+
+  strip.begin();
+  strip.setBrightness(255);
+  strip.show();
 }
 
 void duckAnimate() {
@@ -120,9 +131,14 @@ void changeSong()
   Keyboard.release(KEY_LEFT_GUI); //rn its the control key--- find the key we need
 }
 
-void pulse()
+void pulse(uint32_t color, uint8_t waitTime)
 {
-  //insert
+  for(uint16_t x=0; x < strip.numPixels(); x++)
+  {
+    strip.setPixelColor(x, color);
+    strip.show();
+    delay(waitTime);
+  }
 }
 
 void ledAnimate()
@@ -139,10 +155,10 @@ void loop() {
     {
       changeSong();
     }
-    if (analogRead(sound) >  300)
+    /*if (analogRead(sound) >  300)
     {
       pulse();
-    }
+    }*/
     
     duckAnimate();
    
@@ -158,5 +174,10 @@ void loop() {
     tick.repeat();
 
     ledAnimate();
-    
+
+    //pulse stuff
+    pulse(strip.Color(255, 0 ,255), 50); //magenta
+    pulse(strip.Color(0, 255 ,255), 50); //aqua
+    pulse(strip.Color(30, 0 ,255), 50); //blue
+    pulse(strip.Color(255, 0 ,151), 50); //pink
     }
