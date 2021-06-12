@@ -1,5 +1,3 @@
-#include <Keyboard.h>
-
 //hey amber!! heres the basic setups:
 
 #include <U8g2lib.h>
@@ -9,6 +7,7 @@
 LIS3DHTR<TwoWire> LIS;
 #define WIRE Wire
 #include "Adafruit_NeoPixel.h"
+#include <Keyboard.h>
 
 #define DHTPIN 3
 #define DHTTYPE DHT11
@@ -26,7 +25,7 @@ U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(U8G2_R2, SCL, SDA, U8X8_PIN_NONE);
 #define screen_width 128
 #define screen_height 64
 const int fps = 0; //fast as possible b/c sensors make it slow
-const int currentFrame = 0;
+int currentFrame = 0;
 
 /*const int display_width = 164;
 int current_pos = -display_width;
@@ -68,7 +67,7 @@ void changeSong()
 {
   Keyboard.press(KEY_LEFT_GUI);
   delay(100);
-  Keyboard.release();
+  Keyboard.release(KEY_LEFT_GUI);
 }
 
 void pulse()
@@ -89,16 +88,14 @@ void loop() {
     
     duckAnimate();
    
-      if (animate_frame == 0)
+      if (currentFrame == 0)
       {
-         animate_frame++;
+         currentFrame++;
       }
-      else if (animate_frame == 1)
+      else if (currentFrame == 1)
       {
-        animate_frame--;
+        currentFrame--;
       }
       
     tick.repeat();
-}
-
 }
