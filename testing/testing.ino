@@ -12,12 +12,35 @@ LIS3DHTR<TwoWire> LIS;
 #define DHTPIN 3
 #define DHTTYPE DHT11
 
+#include "grove_two_rgb_led_matrix.h"
+ 
+#ifdef ARDUINO_SAMD_VARIANT_COMPLIANCE
+#define SERIAL SerialUSB
+#else
+#define SERIAL Serial
+#endif
+
+GroveTwoRGBLedMatrixClass matrix;
+
 AsyncDelay tick;
 U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(U8G2_R2, SCL, SDA, U8X8_PIN_NONE);
 
 //pop the image files here:
 
 //define frame1:
+
+uint64_t led1[] = {
+
+  0x5c5cfefefe5c5c5c,
+  0x5cff5c5c5c5cff5c,
+  0xe6e65cf4f45ce6e6,
+  0xe6e65c5c5c5ce6e6,
+  0x5c5c5c5c5c5c5c5c,
+  0x5c5c5c3a3a5c5c5c,
+  0xfe5c3a3a3a3a5cfe,
+  0xfefe3a3a3a3afefe
+};
+
 //define frame2:
 
 //defining variables:
@@ -98,4 +121,9 @@ void loop() {
       }
       
     tick.repeat();
+
+    for (int x=0;x<3;x++) {
+        matrix.displayFrames(led1+x*8, 200, false, 1);
+        delay(700);
+    }
 }
